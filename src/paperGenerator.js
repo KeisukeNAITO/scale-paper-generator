@@ -25,8 +25,12 @@ function calculatePPI(widthPx, heightPx, diagonalInches) {
   return diagonalPx / diagonalInches
 }
 
+function isMajorLine(index, majorEvery) {
+  return index % majorEvery === 0
+}
+
 function formatGridCaption(mm) {
   return `${mm}mm × ${mm}mm`
 }
 
-module.exports = { generateGridLines, calculatePPI, formatGridCaption }
+module.exports = { generateGridLines, calculatePPI, formatGridCaption, isMajorLine }

@@ -1,4 +1,22 @@
-const { generateGridLines, calculatePPI, formatGridCaption } = require('../src/paperGenerator')
+const { generateGridLines, calculatePPI, formatGridCaption, isMajorLine } = require('../src/paperGenerator')
+
+describe('isMajorLine', () => {
+  test('インデックスが0はメジャーライン', () => {
+    expect(isMajorLine(0, 10)).toBe(true)
+  })
+
+  test('インデックスが10はメジャーライン', () => {
+    expect(isMajorLine(10, 10)).toBe(true)
+  })
+
+  test('インデックスが5はマイナーライン', () => {
+    expect(isMajorLine(5, 10)).toBe(false)
+  })
+
+  test('インデックスが1はマイナーライン', () => {
+    expect(isMajorLine(1, 10)).toBe(false)
+  })
+})
 
 describe('formatGridCaption', () => {
   test('10を渡すと "10mm × 10mm" を返す', () => {
