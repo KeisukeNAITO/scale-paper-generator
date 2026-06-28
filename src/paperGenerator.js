@@ -1,15 +1,16 @@
+function range(max, step) {
+  const result = []
+  for (let i = 0; i <= max; i += step) {
+    result.push(i)
+  }
+  return result
+}
+
 function generateGridLines(width, height, spacing) {
-  const verticalLines = []
-  for (let x = 0; x <= width; x += spacing) {
-    verticalLines.push(x)
+  return {
+    verticalLines: range(width, spacing),
+    horizontalLines: range(height, spacing)
   }
-
-  const horizontalLines = []
-  for (let y = 0; y <= height; y += spacing) {
-    horizontalLines.push(y)
-  }
-
-  return { verticalLines, horizontalLines }
 }
 
 module.exports = { generateGridLines }
