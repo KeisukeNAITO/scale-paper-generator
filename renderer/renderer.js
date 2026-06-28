@@ -8,16 +8,12 @@ const widthInput = document.getElementById('width')
 const heightInput = document.getElementById('height')
 
 function applyAspectRatio() {
-  const value = aspectRatioSelect.value
-  if (value === 'custom') return
-  const [w, h] = value.split(':').map(Number)
+  const [w, h] = aspectRatioSelect.value.split(':').map(Number)
   heightInput.value = calculateHeightFromAspectRatio(Number(widthInput.value), w, h)
 }
 
 aspectRatioSelect.addEventListener('change', applyAspectRatio)
-widthInput.addEventListener('input', () => {
-  if (aspectRatioSelect.value !== 'custom') applyAspectRatio()
-})
+widthInput.addEventListener('input', applyAspectRatio)
 
 document.getElementById('generate').addEventListener('click', () => {
   const widthPx = Number(widthInput.value)
