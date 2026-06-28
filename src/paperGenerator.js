@@ -6,10 +6,14 @@ function range(max, step) {
   return result
 }
 
-function generateGridLines(width, height, spacing) {
+function validateSpacing(spacing) {
   if (spacing <= 0) {
     throw new Error('spacing は1以上の正の数を指定してください')
   }
+}
+
+function generateGridLines(width, height, spacing) {
+  validateSpacing(spacing)
   return {
     verticalLines: range(width, spacing),
     horizontalLines: range(height, spacing)
