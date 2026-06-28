@@ -1,12 +1,27 @@
-const { generateGridLines, calculatePPI, formatGridCaption, isMajorLine } = require('../src/paperGenerator')
+const { generateGridLines, calculatePPI, formatGridCaption, isMajorLine, calculateHeightFromAspectRatio } = require('../src/paperGenerator')
 
 const canvas = document.getElementById('paper')
 const ctx = canvas.getContext('2d')
 const downloadBtn = document.getElementById('download')
+const aspectRatioSelect = document.getElementById('aspectRatio')
+const widthInput = document.getElementById('width')
+const heightInput = document.getElementById('height')
+
+function applyAspectRatio() {
+  const value = aspectRatioSelect.value
+  if (value === 'custom') return
+  const [w, h] = value.split(':').map(Number)
+  heightInput.value = calculateHeightFromAspectRatio(Number(widthInput.value), w, h)
+}
+
+aspectRatioSelect.addEventListener('change', applyAspectRatio)
+widthInput.addEventListener('input', () => {
+  if (aspectRatioSelect.value !== 'custom') applyAspectRatio()
+})
 
 document.getElementById('generate').addEventListener('click', () => {
-  const widthPx = Number(document.getElementById('width').value)
-  const heightPx = Number(document.getElementById('height').value)
+  const widthPx = Number(widthInput.value)
+  const heightPx = Number(heightInput.value)
   const diagonalInches = Number(document.getElementById('diagonal').value)
 
   const ppi = calculatePPI(widthPx, heightPx, diagonalInches)
