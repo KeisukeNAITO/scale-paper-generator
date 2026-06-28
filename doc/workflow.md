@@ -34,7 +34,8 @@ sequenceDiagram
     Dev->>Dev: feat [GREEN] コミット
     Dev->>Dev: refactor コミット
     Dev->>GitHub: PR 作成（Closes #N を記載）
-    PO->>GitHub: PR レビュー・承認
+    GitHub->>GitHub: CI（npm test）自動実行
+    PO->>GitHub: CI 通過を確認・PR レビュー・承認
     Dev->>GitHub: main へ Merge commit → Issue 自動クローズ
   end
 ```
