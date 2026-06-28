@@ -1,4 +1,11 @@
-const { generateGridLines } = require('../src/paperGenerator')
+const { generateGridLines, calculatePPI } = require('../src/paperGenerator')
+
+describe('calculatePPI', () => {
+  test('1920x1080ピクセルの24インチモニタのPPIを計算する', () => {
+    const ppi = calculatePPI(1920, 1080, 24)
+    expect(ppi).toBeCloseTo(91.79, 1)
+  })
+})
 
 describe('generateGridLines', () => {
   test('幅300・高さ200・間隔100のとき縦線の座標を返す', () => {
