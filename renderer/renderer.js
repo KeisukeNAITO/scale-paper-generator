@@ -1,4 +1,4 @@
-const { generateGridLines, calculatePPI, formatGridCaption, isMajorLine, calculateHeightFromAspectRatio } = require('../src/paperGenerator')
+const { generateGridLines, calculatePPI, formatGridCaption, isMajorLine, calculateHeightFromAspectRatio, formatGridLabel } = require('../src/paperGenerator')
 
 const canvas = document.getElementById('paper')
 const ctx = canvas.getContext('2d')
@@ -30,6 +30,10 @@ document.getElementById('generate').addEventListener('click', () => {
 
   ctx.clearRect(0, 0, canvas.width, canvas.height)
 
+  const gridMm = 10
+  const fontSize = Math.round(spacingPx * 0.4)
+  ctx.font = `${fontSize}px sans-serif`
+
   verticalLines.forEach((x, index) => {
     ctx.strokeStyle = isMajorLine(index, 10) ? '#888888' : '#cccccc'
     ctx.lineWidth = isMajorLine(index, 10) ? 1.5 : 1
@@ -37,6 +41,12 @@ document.getElementById('generate').addEventListener('click', () => {
     ctx.moveTo(x, 0)
     ctx.lineTo(x, heightPx)
     ctx.stroke()
+
+    const label = formatGridLabel(index, gridMm)
+    if (label) {
+      ctx.fillStyle = '#999999'
+      ctx.fillText(label, x + spacingPx * 0.05, fontSize)
+    }
   })
 
   horizontalLines.forEach((y, index) => {
@@ -46,11 +56,15 @@ document.getElementById('generate').addEventListener('click', () => {
     ctx.moveTo(0, y)
     ctx.lineTo(widthPx, y)
     ctx.stroke()
+
+    const label = formatGridLabel(index, gridMm)
+    if (label) {
+      ctx.fillStyle = '#999999'
+      ctx.fillText(label, spacingPx * 0.05, y + fontSize)
+    }
   })
 
-  const gridMm = 10
   ctx.fillStyle = '#999999'
-  ctx.font = `${Math.round(spacingPx * 0.4)}px sans-serif`
   ctx.fillText(formatGridCaption(gridMm), spacingPx * 0.2, spacingPx * 0.7)
 
   downloadBtn.disabled = false
