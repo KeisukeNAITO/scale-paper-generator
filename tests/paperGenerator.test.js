@@ -1,4 +1,4 @@
-const { generateGridLines, calculatePPI, formatGridCaption, isMajorLine, calculateHeightFromAspectRatio } = require('../src/paperGenerator')
+const { generateGridLines, calculatePPI, formatGridCaption, isMajorLine, calculateHeightFromAspectRatio, formatGridLabel } = require('../src/paperGenerator')
 
 describe('isMajorLine', () => {
   test('インデックスが0はメジャーライン', () => {
@@ -15,6 +15,24 @@ describe('isMajorLine', () => {
 
   test('インデックスが1はマイナーライン', () => {
     expect(isMajorLine(1, 10)).toBe(false)
+  })
+})
+
+describe('formatGridLabel', () => {
+  test('index が 0 のとき空文字を返す', () => {
+    expect(formatGridLabel(0, 10)).toBe('')
+  })
+
+  test('index が 1・spacingMm が 10 のとき "10" を返す', () => {
+    expect(formatGridLabel(1, 10)).toBe('10')
+  })
+
+  test('index が 3・spacingMm が 10 のとき "30" を返す', () => {
+    expect(formatGridLabel(3, 10)).toBe('30')
+  })
+
+  test('index が 2・spacingMm が 5 のとき "10" を返す', () => {
+    expect(formatGridLabel(2, 5)).toBe('10')
   })
 })
 
