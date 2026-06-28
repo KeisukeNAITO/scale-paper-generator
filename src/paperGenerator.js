@@ -20,4 +20,9 @@ function generateGridLines(width, height, spacing) {
   }
 }
 
-module.exports = { generateGridLines }
+function calculatePPI(widthPx, heightPx, diagonalInches) {
+  const diagonalPx = Math.sqrt(widthPx ** 2 + heightPx ** 2)
+  return diagonalPx / diagonalInches
+}
+
+module.exports = { generateGridLines, calculatePPI }
