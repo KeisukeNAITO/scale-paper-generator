@@ -1,4 +1,4 @@
-const { generateGridLines, calculatePPI, formatGridCaption } = require('../src/paperGenerator')
+const { generateGridLines, calculatePPI, formatGridCaption, isMajorLine } = require('../src/paperGenerator')
 
 const canvas = document.getElementById('paper')
 const ctx = canvas.getContext('2d')
@@ -18,17 +18,19 @@ document.getElementById('generate').addEventListener('click', () => {
   const { verticalLines, horizontalLines } = generateGridLines(widthPx, heightPx, spacingPx)
 
   ctx.clearRect(0, 0, canvas.width, canvas.height)
-  ctx.strokeStyle = '#cccccc'
-  ctx.lineWidth = 1
 
-  verticalLines.forEach(x => {
+  verticalLines.forEach((x, index) => {
+    ctx.strokeStyle = isMajorLine(index, 10) ? '#888888' : '#cccccc'
+    ctx.lineWidth = isMajorLine(index, 10) ? 1.5 : 1
     ctx.beginPath()
     ctx.moveTo(x, 0)
     ctx.lineTo(x, heightPx)
     ctx.stroke()
   })
 
-  horizontalLines.forEach(y => {
+  horizontalLines.forEach((y, index) => {
+    ctx.strokeStyle = isMajorLine(index, 10) ? '#888888' : '#cccccc'
+    ctx.lineWidth = isMajorLine(index, 10) ? 1.5 : 1
     ctx.beginPath()
     ctx.moveTo(0, y)
     ctx.lineTo(widthPx, y)
