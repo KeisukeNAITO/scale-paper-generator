@@ -33,4 +33,8 @@ function formatGridCaption(mm) {
   return `${mm}mm × ${mm}mm`
 }
 
-module.exports = { generateGridLines, calculatePPI, formatGridCaption, isMajorLine }
+function calculateHeightFromAspectRatio(widthPx, aspectW, aspectH) {
+  return Math.round(widthPx * aspectH / aspectW)
+}
+
+module.exports = { generateGridLines, calculatePPI, formatGridCaption, isMajorLine, calculateHeightFromAspectRatio }
