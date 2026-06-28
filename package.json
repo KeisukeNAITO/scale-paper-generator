@@ -1,0 +1,18 @@
+{
+  "name": "scale-paper-generator",
+  "version": "0.1.0",
+  "description": "勉強会用サンプルアプリ - スケール用紙ジェネレーター",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "devDependencies": {
+    "electron": "^42.5.0",
+    "jest": "^30.4.2"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  }
+}
