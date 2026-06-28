@@ -1,4 +1,4 @@
-const { generateGridLines, calculatePPI, formatGridCaption, isMajorLine } = require('../src/paperGenerator')
+const { generateGridLines, calculatePPI, formatGridCaption, isMajorLine, calculateHeightFromAspectRatio } = require('../src/paperGenerator')
 
 describe('isMajorLine', () => {
   test('インデックスが0はメジャーライン', () => {
@@ -32,6 +32,28 @@ describe('calculatePPI', () => {
   test('1920x1080ピクセルの24インチモニタのPPIを計算する', () => {
     const ppi = calculatePPI(1920, 1080, 24)
     expect(ppi).toBeCloseTo(91.79, 1)
+  })
+})
+
+describe('calculateHeightFromAspectRatio', () => {
+  test('16:9 で横1920pxのとき縦は1080px', () => {
+    expect(calculateHeightFromAspectRatio(1920, 16, 9)).toBe(1080)
+  })
+
+  test('16:10 で横1920pxのとき縦は1200px', () => {
+    expect(calculateHeightFromAspectRatio(1920, 16, 10)).toBe(1200)
+  })
+
+  test('4:3 で横1920pxのとき縦は1440px', () => {
+    expect(calculateHeightFromAspectRatio(1920, 4, 3)).toBe(1440)
+  })
+
+  test('21:9 で横2560pxのとき縦は1097px', () => {
+    expect(calculateHeightFromAspectRatio(2560, 21, 9)).toBe(1097)
+  })
+
+  test('1:1 で横1920pxのとき縦は1920px', () => {
+    expect(calculateHeightFromAspectRatio(1920, 1, 1)).toBe(1920)
   })
 })
 
