@@ -2,6 +2,7 @@ const { generateGridLines, calculatePPI } = require('../src/paperGenerator')
 
 const canvas = document.getElementById('paper')
 const ctx = canvas.getContext('2d')
+const downloadBtn = document.getElementById('download')
 
 document.getElementById('generate').addEventListener('click', () => {
   const widthPx = Number(document.getElementById('width').value)
@@ -33,4 +34,13 @@ document.getElementById('generate').addEventListener('click', () => {
     ctx.lineTo(widthPx, y)
     ctx.stroke()
   })
+
+  downloadBtn.disabled = false
+})
+
+downloadBtn.addEventListener('click', () => {
+  const link = document.createElement('a')
+  link.download = 'wallpaper.png'
+  link.href = canvas.toDataURL('image/png')
+  link.click()
 })
