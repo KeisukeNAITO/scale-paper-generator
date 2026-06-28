@@ -25,4 +25,8 @@ function calculatePPI(widthPx, heightPx, diagonalInches) {
   return diagonalPx / diagonalInches
 }
 
-module.exports = { generateGridLines, calculatePPI }
+function formatGridCaption(mm) {
+  return `${mm}mm × ${mm}mm`
+}
+
+module.exports = { generateGridLines, calculatePPI, formatGridCaption }

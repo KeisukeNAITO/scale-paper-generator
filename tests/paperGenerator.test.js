@@ -1,4 +1,14 @@
-const { generateGridLines, calculatePPI } = require('../src/paperGenerator')
+const { generateGridLines, calculatePPI, formatGridCaption } = require('../src/paperGenerator')
+
+describe('formatGridCaption', () => {
+  test('10を渡すと "10mm × 10mm" を返す', () => {
+    expect(formatGridCaption(10)).toBe('10mm × 10mm')
+  })
+
+  test('5を渡すと "5mm × 5mm" を返す', () => {
+    expect(formatGridCaption(5)).toBe('5mm × 5mm')
+  })
+})
 
 describe('calculatePPI', () => {
   test('1920x1080ピクセルの24インチモニタのPPIを計算する', () => {

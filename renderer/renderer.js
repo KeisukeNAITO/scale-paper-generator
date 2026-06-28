@@ -1,4 +1,4 @@
-const { generateGridLines, calculatePPI } = require('../src/paperGenerator')
+const { generateGridLines, calculatePPI, formatGridCaption } = require('../src/paperGenerator')
 
 const canvas = document.getElementById('paper')
 const ctx = canvas.getContext('2d')
@@ -34,6 +34,11 @@ document.getElementById('generate').addEventListener('click', () => {
     ctx.lineTo(widthPx, y)
     ctx.stroke()
   })
+
+  const gridMm = 10
+  ctx.fillStyle = '#999999'
+  ctx.font = `${Math.round(spacingPx * 0.4)}px sans-serif`
+  ctx.fillText(formatGridCaption(gridMm), spacingPx * 0.2, spacingPx * 0.7)
 
   downloadBtn.disabled = false
 })
